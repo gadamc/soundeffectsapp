@@ -1,0 +1,5 @@
+*.py[co]
+*.DS_*
+*.ipynb_checkpoints*
+
+input_videos/*
