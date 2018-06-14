@@ -76,14 +76,14 @@
     </div> --><!-- /.container -->
 
 <div class="container">
-    <div class="starter-template">
+    <!-- <div class="starter-template">
         <h2>Output Page</h2>
         <p>Enter some user input</p>
-    </div>
+    </div> -->
 
     <div class = "container">
 
-      <form  action="/output" method="GET">
+      <!-- <form  action="/output" method="GET">
         <div class="form-group">
           <label for="birth_month">Birth Month:</label>
           <input type="text" id="birth_month" name='birth_month' placeholder="e.g. ">
@@ -91,7 +91,23 @@
         <div>
           <button type="submit" class="btn btn-default btn-lg">Find these Cesareans!</button>
         </div>
+      </form> -->
+
+
+
+<!--       why doesn't this work!   -->
+
+   <!--    <form action = "uploader" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <div>
+            <button type="submit" class="btn btn-default btn-lg">Upload</button>
+         </div>
+
       </form>
+     -->
+
+
     </div>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
@@ -106,8 +122,8 @@
 
       <table class="table table-hover">
       <tr><th>filename</th><th>score</th></tr>
-      {% for birth in births %}
-      <tr><td>{{ the_result['filename'] }}</td><td>{{ the_result['score']}}</td></tr>
+      {% for aRes in resultsFromModel %}
+      <tr><td>{{ aRes[0] }}</td><td>{{ aRes[1]}}</td></tr>
       {% endfor %}
       </table>
 

@@ -80,31 +80,36 @@ def upload_file():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return 'uploaded {}'.format(filename)
+    #return 'uploaded {}'.format(filename)
 
     ## could use this to return sound file? 
     # no, probably just want to populate a list with links to the soundeffect files
-    the_result = ModelIt(patient,births)
-    return render_template("output.html", births = births, the_result = the_result)
+    the_result = ModelIt(filename)
+    #return str(the_result)
+    #the_result_urls = map(lambda x: url_for('static', filename=x[0])) 
+
+    #return render_template("output.html", resultsFromModel = the_result, resulUrls = the_result_urls)
+    return render_template("output.html", resultsFromModel = the_result)
+    
     #return send_from_directory(app.config['UPLOAD_FOLDER'],
     #                           filename)
 
-@app.route('/output')
-def cesareans_output():
-  #pull 'birth_month' from input field and store it
-  patient = request.args.get('birth_month')
-    #just select the Cesareans  from the birth dtabase for the month that the user inputs
-  query = "SELECT index, attendant, birth_month FROM birth_data_table WHERE delivery_method='Cesarean' AND birth_month='%s'" % patient
-  print(query)
-  query_results=pd.read_sql_query(query,con)
-  print(query_results)
-  births = []
-  for i in range(0,query_results.shape[0]):
-      births.append(dict(index=query_results.iloc[i]['index'], attendant=query_results.iloc[i]['attendant'], birth_month=query_results.iloc[i]['birth_month']))
-      the_result = ''
-  #return render_template("output.html", births = births, the_result = the_result)
-  the_result = ModelIt(patient,births)
-  return render_template("output.html", births = births, the_result = the_result)
+# @app.route('/output')
+# def cesareans_output():
+#   #pull 'birth_month' from input field and store it
+#   patient = request.args.get('birth_month')
+#     #just select the Cesareans  from the birth dtabase for the month that the user inputs
+#   query = "SELECT index, attendant, birth_month FROM birth_data_table WHERE delivery_method='Cesarean' AND birth_month='%s'" % patient
+#   print(query)
+#   query_results=pd.read_sql_query(query,con)
+#   print(query_results)
+#   births = []
+#   for i in range(0,query_results.shape[0]):
+#       births.append(dict(index=query_results.iloc[i]['index'], attendant=query_results.iloc[i]['attendant'], birth_month=query_results.iloc[i]['birth_month']))
+#       the_result = ''
+#   #return render_template("output.html", births = births, the_result = the_result)
+#   the_result = ModelIt(patient,births)
+#   return render_template("output.html", births = births, the_result = the_result)
 
 
 
