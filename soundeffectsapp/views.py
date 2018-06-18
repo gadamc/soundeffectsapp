@@ -1,18 +1,7 @@
-# from flask import render_template
-# from soundeffectsapp import app
-
-# @app.route('/')
-# @app.route('/index')
-# def index():
-#    user = { 'nickname': 'Adam' } # fake user
-#    return render_template("index.html",
-#        title = 'Home',
-#        user = user)
-
 import os
 
 from flask import render_template
-from flask import request, redirect, url_for
+from flask import request, redirect, url_for, flash
 from soundeffectsapp import app
 
 from sqlalchemy import create_engine
@@ -25,15 +14,6 @@ from werkzeug import secure_filename
 from soundeffectsapp.a_Model import ModelIt
 
 
-# def ModelIt(fromUser  = 'Default', births = []):
-#   in_month = len(births)
-#   print('The number born is %i' % in_month)
-#   result = in_month
-#   if fromUser != 'Default':
-#     return result
-#   else:
-#     return 'check your input'
-
 user = 'adam' #add your username here (same as previous postgreSQL)                      
 host = 'localhost'
 dbname = 'birth_db'
@@ -41,10 +21,11 @@ db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
 con = None
 con = psycopg2.connect(database = dbname, user = user)
 
-UPLOAD_FOLDER = '/Users/adam/projects/soundeffects/flaskapp/input_videos'
+UPLOAD_FOLDER = os.path.join(app.config['CWD'], 'input_videos')
 ALLOWED_EXTENSIONS = set(['mp4', 'jpg', 'jpeg'])
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
 @app.route('/')
 @app.route('/index')
@@ -85,10 +66,11 @@ def uploaded_file(filename):
     ## could use this to return sound file? 
     # no, probably just want to populate a list with links to the soundeffect files
     the_result = ModelIt(filename)
+    print(the_result)
     #return str(the_result)
     #the_result_urls = map(lambda x: url_for('static', filename=x[0])) 
 
-    #return render_template("output.html", resultsFromModel = the_result, resulUrls = the_result_urls)
+
     return render_template("output.html", resultsFromModel = the_result)
     
     #return send_from_directory(app.config['UPLOAD_FOLDER'],
