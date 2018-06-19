@@ -11,7 +11,7 @@ import psycopg2
 
 from werkzeug import secure_filename
 
-from soundeffectsapp.a_Model import ModelIt
+import soundeffectsapp.a_Model as videoToAudioModel
 
 
 user = 'adam' #add your username here (same as previous postgreSQL)                      
@@ -65,7 +65,7 @@ def uploaded_file(filename):
 
     ## could use this to return sound file? 
     # no, probably just want to populate a list with links to the soundeffect files
-    the_result = ModelIt(filename)
+    the_result = videoToAudioModel.runModel(filename)
     print(the_result)
     #return str(the_result)
     #the_result_urls = map(lambda x: url_for('static', filename=x[0])) 

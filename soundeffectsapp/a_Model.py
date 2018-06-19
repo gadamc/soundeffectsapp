@@ -71,7 +71,15 @@ def _make_bytes(int_array):
   else:
     return bytes(int_array)
 
-def quantize(features, min_quantized_value=-2.0, max_quantized_value=2.0, return_as_bytes=False):
+def _clip_n_scale(features, min_value=-2.0, max_value=2.0):
+  assert features.dtype == 'float32'
+  assert len(features.shape) == 1  # 1-D array
+  features = numpy.clip(features, min_value, max_value)
+  _range = (max_value - min_value)/2.
+  return features / _range
+
+
+def _quantize(features, min_quantized_value=-2.0, max_quantized_value=2.0, return_as_bytes=False):
   """Quantizes float32 `features` into string."""
   assert features.dtype == 'float32'
   assert len(features.shape) == 1  # 1-D array
@@ -85,15 +93,16 @@ def quantize(features, min_quantized_value=-2.0, max_quantized_value=2.0, return
   else:
     return features
 
-def getFeaturesFromImage(inputfile):
+def _getFeaturesFromImage(inputfile):
 	extractor = YouTube8MFeatureExtractor(VIDEO_MODEL_DIR)
 	im = np.array(Image.open(inputfile))
-	features = _scale(np.array(quantize(extractor.extract_rgb_frame_features(im)), dtype = np.float32))
+	#features = _scale(np.array(_quantize(extractor.extract_rgb_frame_features(im)), dtype = np.float32))
+	features = _clip_n_scale
 	#features = _scale(np.clip(extractor.extract_rgb_frame_features(im), -2.0, 2.0), 0, 4.0)
 	return features[np.newaxis, :]
 
 
-def calcCosSim(audio_features):
+def _calcCosSim(audio_features):
 	sf_similarities = []
 	for k,v in _SOUNDFILE_FEATURES.items():
 		mean_audio = np.array(v['mean_audio']).reshape(1,-1)
@@ -102,12 +111,12 @@ def calcCosSim(audio_features):
 
 	return sf_similarities
 
-def replacepath(sftuple):
+def _replacepath(sftuple):
 	fname, costheta, fpath = sftuple
 	linkpath = os.path.join(SOUNDFILE_WAV_DIR, os.path.splitext(os.path.basename(fpath))[0])
 	return(fname, costheta, linkpath)
 
-def ModelIt(filename):
+def runModel(filename):
 	
 	inputpath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
@@ -120,7 +129,7 @@ def ModelIt(filename):
 
 	#first step is to extract features
 	if fileext in ('jpg', 'jpeg'):
-		features = getFeaturesFromImage(inputpath)
+		features = _getFeaturesFromImage(inputpath)
 	else:
 		return [['not yet implemented', -1]]
 		#features = getAverageFeaturesFromVideo(inputpath)
@@ -135,7 +144,7 @@ def ModelIt(filename):
 	audio_features = TORCHMODEL(torch.from_numpy(features))
 	print(_unscale(audio_features))
 
-	sfsims = calcCosSim(_unscale(audio_features.detach().numpy()))
+	sfsims = _calcCosSim(_unscale(audio_features.detach().numpy()))
 	sfsims.sort(key = lambda x:x[1], reverse=True)
 	sfsims = list(map(replacepath, sfsims))
 	
