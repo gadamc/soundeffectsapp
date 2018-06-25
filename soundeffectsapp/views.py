@@ -22,6 +22,9 @@ con = None
 con = psycopg2.connect(database = dbname, user = user)
 
 UPLOAD_FOLDER = os.path.join(app.config['CWD'], 'input_videos')
+if os.path.isdir(UPLOAD_FOLDER) is False:
+  os.mkdir(UPLOAD_FOLDER)
+  
 ALLOWED_EXTENSIONS = set(['mp4', 'jpg', 'jpeg'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
