@@ -4,7 +4,7 @@ An application to demonstrate the matching of images and videos with a an approp
 
 ## Installation and Setup
 
-Following [AWS setup instructions](https://docs.google.com/presentation/d/1EjBfDnIauu9L5LIH_79XqIWkWfCeB1AA99Q7rD75W_I/edit#slide=id.p) with an Ubuntu 16 server, the following commands install the necessary packages. 
+Following [AWS setup instructions](https://docs.google.com/presentation/d/1EjBfDnIauu9L5LIH_79XqIWkWfCeB1AA99Q7rD75W_I/edit#slide=id.p) with an Ubuntu 16 server, the following commands install the necessary packages. I am running wthis with a t2.medium instance, with a 16 GB EBS volume (8 GB default size was not large enough.)
 
 ```
 1. conda install numpy scipy pandas scikit-learn flask sqlalchemy
