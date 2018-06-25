@@ -4,22 +4,22 @@ from flask import render_template
 from flask import request, redirect, url_for, flash
 from soundeffectsapp import app
 
-from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, create_database
-import pandas as pd
-import psycopg2
+# from sqlalchemy import create_engine
+# from sqlalchemy_utils import database_exists, create_database
+# import pandas as pd
+# import psycopg2
 
 from werkzeug import secure_filename
 
 import soundeffectsapp.a_Model as videoToAudioModel
 
 
-user = 'adam' #add your username here (same as previous postgreSQL)                      
-host = 'localhost'
-dbname = 'birth_db'
-db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
-con = None
-con = psycopg2.connect(database = dbname, user = user)
+# user = 'adam' #add your username here (same as previous postgreSQL)                      
+# host = 'localhost'
+# dbname = 'birth_db'
+# db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
+# con = None
+# con = psycopg2.connect(database = dbname, user = user)
 
 UPLOAD_FOLDER = os.path.join(app.config['CWD'], 'input_videos')
 if os.path.isdir(UPLOAD_FOLDER) is False:
