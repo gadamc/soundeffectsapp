@@ -1,5 +1,7 @@
 # Models for AudioSet: A Large Scale Dataset of Audio Events
 
+## NB: This directory was copied from the [Tensorflow Reseach Model](https://github.com/tensorflow/models/tree/master/research/audioset) which is licensed under Apache 2.0
+
 This repository provides models and supporting code associated with
 [AudioSet](http://g.co/audioset), a dataset of over 2 million human-labeled
 10-second YouTube video soundtracks, with labels taken from an ontology of
