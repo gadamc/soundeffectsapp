@@ -38,26 +38,38 @@ def cesareans_input():
     return render_template("input.html")
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    print('checking allowed: {}'.format(filename))
+    extension = os.path.splitext(filename)[1].lower().strip('.')
+    print(extension)
+
+    return '.' in filename and extension in ALLOWED_EXTENSIONS
+           # filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
-   if request.method == 'POST':
-      if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-      uploadFile = request.files['file']
-      if uploadFile.filename == '':
-        flash('No selected file')
-        return redirect(request.url)
+  print (request.files)
 
-      if uploadFile and allowed_file(uploadFile.filename):
-        #uploadFile.save(secure_filename(uploadFile.filename))
-        filename = secure_filename(uploadFile.filename)
-        uploadFile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('uploaded_file',
-                                    filename=filename))
+  if request.method == 'POST':
+
+    if 'file' not in request.files:
+          flash('No file part')
+          return redirect(request.url)
+    uploadFile = request.files['file']
+    if uploadFile.filename == '':
+      flash('No selected file')
+      return redirect(request.url)
+
+    if uploadFile and allowed_file(uploadFile.filename):
+      print("file true and allowed file")
+      #uploadFile.save(secure_filename(uploadFile.filename))
+      filename = secure_filename(uploadFile.filename)
+      uploadFile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      return redirect(url_for('uploaded_file',
+                                  filename=filename))
+
+    else: 
+      print("not allowed")
+      return redirect(url_for('uploaded_file', filename='invalid.ext'))
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -65,7 +77,7 @@ def uploaded_file(filename):
 
     ## could use this to return sound file? 
     # no, probably just want to populate a list with links to the soundeffect files
-    the_result = videoToAudioModel.runModel(filename)
+    the_result = videoToAudioModel.runModel(filename)[:5]
     print(the_result)
     #return str(the_result)
     #the_result_urls = map(lambda x: url_for('static', filename=x[0])) 
