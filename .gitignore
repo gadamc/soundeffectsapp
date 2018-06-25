@@ -3,3 +3,4 @@
 *.ipynb_checkpoints*
 
 input_videos/*
+*__pycache__*
