@@ -60,6 +60,9 @@ import vggish_params
 import vggish_postprocess
 import vggish_slim
 
+from vggish_params import vprint
+
+
 flags = tf.app.flags
 
 flags.DEFINE_string(
@@ -93,6 +96,10 @@ flags.DEFINE_string(
     'output', None,
     'Path to where JSON and TFRecord file where embeddings will be written.')
 
+flags.DEFINE_boolean(
+    'verbose', False,
+    'If true, statements will be printed.')
+
 FLAGS = flags.FLAGS
 
 
@@ -120,6 +127,10 @@ def main(_):
   #   wav_file.seek(0)
 
 
+  #global vggish_params.VERBOSE 
+  vggish_params.VERBOSE = FLAGS.verbose
+
+
   if FLAGS.wav_file_inputdir:
     wav_file_list = glob.glob(os.path.join(FLAGS.wav_file_inputdir,"*.wav"))
   else:
@@ -139,7 +150,8 @@ def main(_):
     print('RAW WAV FILE: {}'.format(wav_file))
 
     examples_batch = vggish_input.wavfile_to_examples(wav_file)
-    #print(examples_batch)
+    vprint('examples_batch shape')
+    vprint(str(examples_batch.shape))
 
     # Prepare a postprocessor to munge the model embeddings.
     pproc = vggish_postprocess.Postprocessor(FLAGS.pca_params)
@@ -164,14 +176,21 @@ def main(_):
       [embedding_batch] = sess.run([embedding_tensor],
                                    feed_dict={features_tensor: examples_batch})
 
+      vprint('embedding_batch shape')
+      vprint(str(embedding_batch.shape))
+
       postprocessed_batch =  pproc.postprocess(embedding_batch, FLAGS.clip_and_quantize)
-      #print(postprocessed_batch)
+      #vprint(postprocessed_batch)
+      vprint('postprocessed_batch shape')
+      vprint(str(postprocessed_batch.shape))
+
 
       #calculate means
       postprocessed_batch_mean = np.mean(postprocessed_batch, axis=0)
       postprocessed_batch_median = np.median(postprocessed_batch, axis=0)
 
-      print(postprocessed_batch_mean.shape)
+      vprint('postprocessed_batch_mean shape')
+      vprint(str(postprocessed_batch_mean.shape))
 
       # Write the postprocessed embeddings as a SequenceExample, in a similar
       # format as the features released in AudioSet. Each row of the batch of

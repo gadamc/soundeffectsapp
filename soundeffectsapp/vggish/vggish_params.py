@@ -23,6 +23,8 @@ NUM_FRAMES = 96  # Frames in input mel-spectrogram patch.
 NUM_BANDS = 64  # Frequency bands in input mel-spectrogram patch.
 EMBEDDING_SIZE = 128  # Size of embedding layer.
 
+VERBOSE = False
+
 # Hyperparameters used in feature and example generation.
 SAMPLE_RATE = 16000
 STFT_WINDOW_LENGTH_SECONDS = 0.025
@@ -51,3 +53,7 @@ INPUT_TENSOR_NAME = INPUT_OP_NAME + ':0'
 OUTPUT_OP_NAME = 'vggish/embedding'
 OUTPUT_TENSOR_NAME = OUTPUT_OP_NAME + ':0'
 AUDIO_EMBEDDING_FEATURE_NAME = 'audio_embedding'
+
+def vprint(input):
+	if VERBOSE:
+		print(input)

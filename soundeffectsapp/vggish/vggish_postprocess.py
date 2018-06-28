@@ -18,6 +18,8 @@
 import numpy as np
 
 import vggish_params
+from vggish_params import vprint
+
 
 
 class Postprocessor(object):
@@ -72,8 +74,26 @@ class Postprocessor(object):
     # - Premultiply by PCA matrix of shape [output_dims, input_dims]
     #   where both are are equal to embedding_size in our case.
     # - Transpose result back to [batch_size, embedding_size].
+    vprint('postprocess input data')
+    vprint(embeddings_batch.shape)
+
+    vprint('postprocess input data')
+    vprint(embeddings_batch)
+
+    vprint('pca matrix')
+    vprint(self._pca_matrix)
+
+    vprint('pca means')
+    vprint(self._pca_means)
+
     pca_applied = np.dot(self._pca_matrix,
                          (embeddings_batch.T - self._pca_means)).T
+
+    vprint('postprocess pca_applied shape')
+    vprint(pca_applied.shape)
+
+    vprint('postprocess pca_applied')
+    vprint(pca_applied)
 
     if clip_and_quantize:
       # Quantize by:

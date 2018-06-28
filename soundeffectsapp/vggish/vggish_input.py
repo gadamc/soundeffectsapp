@@ -21,6 +21,7 @@ from scipy.io import wavfile
 
 import mel_features
 import vggish_params
+from vggish_params import vprint
 
 
 def waveform_to_examples(data, sample_rate):
@@ -39,6 +40,9 @@ def waveform_to_examples(data, sample_rate):
     spectrogram, covering num_frames frames of audio and num_bands mel frequency
     bands, where the frame length is vggish_params.STFT_HOP_LENGTH_SECONDS.
   """
+  vprint('waveform_to_examples input data shape')
+  vprint(data.shape)
+
   # Convert to mono.
   if len(data.shape) > 1:
     data = np.mean(data, axis=1)
@@ -46,6 +50,9 @@ def waveform_to_examples(data, sample_rate):
   if sample_rate != vggish_params.SAMPLE_RATE:
     data = resampy.resample(data, sample_rate, vggish_params.SAMPLE_RATE)
 
+  vprint('waveform_to_examples resampled mono shape')
+  vprint(data.shape)
+  
   # Compute log mel spectrogram features.
   log_mel = mel_features.log_mel_spectrogram(
       data,
@@ -57,6 +64,9 @@ def waveform_to_examples(data, sample_rate):
       lower_edge_hertz=vggish_params.MEL_MIN_HZ,
       upper_edge_hertz=vggish_params.MEL_MAX_HZ)
 
+  vprint('waveform_to_examples log_mel shape')
+  vprint(log_mel.shape)
+
   # Frame features into examples.
   features_sample_rate = 1.0 / vggish_params.STFT_HOP_LENGTH_SECONDS
   example_window_length = int(round(
@@ -67,6 +77,9 @@ def waveform_to_examples(data, sample_rate):
       log_mel,
       window_length=example_window_length,
       hop_length=example_hop_length)
+
+  vprint('waveform_to_examples log_mel reshaped')
+  vprint(log_mel_examples.shape)
   return log_mel_examples
 
 
