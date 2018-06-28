@@ -33,8 +33,6 @@
 
   <body>
 
-
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -48,45 +46,49 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/about">About</a></li>
             <li><a href="/slides">Slides</a></li>
           </ul>
         </div>
       </div>
-
     </nav>
     
-    <br><br>
-    
-    <!-- <br><br><br> -->
-    <div class="row top10bottom2">
-      <!-- <div class="col-lg-8 col-md-8"></div> -->
-      <!-- <div class="col-lg-4 col-md-4 center-block">
-        <img class='center-block img-responsive' src="{{ inputfilename }}"/ max-width='50%';>
-      </div> -->
-      <div class="col-lg-6 col-md-6 center-block">
-        <img class='center-block img-responsive' src="/static/img/RGB-Sound-Wave-4.png" max-width='50%';>
-      </div>
-      <!-- <div class="col-lg-8 col-md-8"></div> -->
-    </div>
-
+   
     <div class="container">
+
       <div class="starter-template">
-        <p class="lead">Here are your sound files for this pictures or video.<br></p>
+        <br>
+        <br>
+        <p class="lead"><br> SoundFX demonstrates a learnable association between the image and audio components of a video. <!-- Specifially, the output feature vectors  
+           from the video images passed to the Inceptionv3 CNN in a video to output feature vectors generated from the VGGish CNN model .  -->
+          </p> 
+          <br>
+           <br>
+           <br>
+           <br>
+          <p class="lead">
+          G. Adam Cox<br>
+          <a href="https://github.com/gadamc">github</a><br>
+          <a href="https://www.linkedin.com/in/gadamc/">linkedin</a><br>
+          </p>
+        </p>
       </div>
 
-      <table class="table table-hover">
-      <tr><th>filename</th><th>score</th></tr>
-      {% for aRes in resultsFromModel %}
-      <tr><td><a href="{{ aRes[2] }}">Sound File {{ loop.index }}</a></td><td>{{ aRes[1]}}</td></tr>
-      {% endfor %}
-      </table>
+     </div><!-- /.container -->
+
+    <!-- <h3>G. Adam Cox</h3>
+    <a href="https://github.com/gadamc">github</a>
+    <a href="https://www.linkedin.com/in/gadamc/">linkedin</a> -->
+
+    </div><!-- /.container -->
+
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
 
 
     </div><!-- /.container -->
-  </div>
-
 
 
     <!-- Bootstrap core JavaScript
@@ -97,8 +99,5 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-
-    <script src="static/js/bootstrap.min.js"></script>
-  
   </body>
 </html>
