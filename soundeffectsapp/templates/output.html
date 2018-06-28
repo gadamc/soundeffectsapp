@@ -123,7 +123,7 @@
       <table class="table table-hover">
       <tr><th>filename</th><th>score</th></tr>
       {% for aRes in resultsFromModel %}
-      <tr><td><a href="{{ aRes[2] }}">{{ aRes[0] }}</a></td><td>{{ aRes[1]}}</td></tr>
+      <tr><td><a href="{{ aRes[2] }}">Sound File {{ loop.index }}</a></td><td>{{ aRes[1]}}</td></tr>
       {% endfor %}
       </table>
 
