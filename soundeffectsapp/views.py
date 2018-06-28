@@ -86,10 +86,18 @@ def uploaded_file(filename):
     #the_result_urls = map(lambda x: url_for('static', filename=x[0])) 
 
 
-    return render_template("output.html", resultsFromModel = the_result)
+    return render_template("output.html", resultsFromModel = the_result, inputfilename = os.path.join(app.config['UPLOAD_FOLDER'], filename))
     
     #return send_from_directory(app.config['UPLOAD_FOLDER'],
     #                           filename)
+
+@app.route('/about')
+def about_soundfx():
+    return render_template("about.html")
+
+@app.route('/slides')
+def slides_soundfx():
+    return render_template("slides.html")
 
 # @app.route('/output')
 # def cesareans_output():

@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>SoundFX</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -42,13 +42,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/">SoundFX</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/slides">Slides</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -75,12 +75,23 @@
       <script src="static/js/bootstrap.min.js"></script> 
 
     </div>--><!-- /.container -->
-     
-    <div class="container">
+    <div class="row top10bottom2">
+      <div class="col-lg-4 col-md-4"></div>
+      <!-- <div class="col-lg-4 col-md-4 center-block">
+        <img class='center-block img-responsive' src="{{ inputfilename }}"/ max-width='50%';>
+      </div> -->
+      <div class="col-lg-4 col-md-4 center-block">
+        <img class='center-block img-responsive' src="/static/img/RGB-Sound-Wave-4.png" max-width='100%';>
+      </div>
+      <div class="col-lg-4 col-md-4"></div>
+    </div>
+
+
+    <center>
+      <div class="container">
 
       <div class="starter-template">
-          <h2>Sound Effects</h2>
-          <p>Enter an mp4 or jpg file</p>
+          <h2>SoundFX</h2>
       </div>
 
       <div class = "container">
@@ -99,18 +110,20 @@
         <form action = "uploader" method = "POST" 
          enctype = "multipart/form-data">
          <input type = "file" name = "file" />
+         <br>
+
          <div>
-            <button type="submit" class="btn btn-default btn-lg">Upload</button>
+            <button type="submit" class="btn btn-default btn-lg">Find Sound</button>
          </div>
 
         </form>
-
       </div>
 
       <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
       <script src="../static/js/bootstrap.min.js"></script>
+    </div>
 
-    </div> <!-- /.container-->
+    </center> <!-- /.container-->
 
 
     <!-- Bootstrap core JavaScript
