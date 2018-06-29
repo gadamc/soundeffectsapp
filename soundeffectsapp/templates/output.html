@@ -76,10 +76,11 @@
         <p class="lead">Here are your sound files for this pictures or video.<br></p>
       </div>
 
+      
       <table class="table table-hover">
-      <tr><th>filename</th><th>score</th></tr>
+      <tr><th>filename</th><th>audio</th><th>score</th></tr>
       {% for aRes in resultsFromModel %}
-      <tr><td><a href="{{ aRes[2] }}">Sound File {{ loop.index }}</a></td><td>{{ aRes[1]}}</td></tr>
+      <tr><td><a href="{{ aRes[2] }}">Sound File {{ loop.index }}</a></td><td><audio controls><source src="{{ aRes[2] }}" type="audio/wav"></audio></td><td>{{ aRes[1]}}</td></tr>
       {% endfor %}
       </table>
 
