@@ -13,7 +13,6 @@ This runs on an AWS t2.medium instance with a 16 GB EBS volume running Ubuntu 16
 2. conda install pytorch-cpu torchvision-cpu -c pytorch
 3. conda install -c conda-forge tensorflow
 4. conda install pillow
-5. conda install sqlalchemy-utils
 ```
 
 Run the server
