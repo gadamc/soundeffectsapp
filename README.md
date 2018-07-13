@@ -6,7 +6,7 @@ An application to match unlabeled images from videos to unlabeled sound files. A
 
 ## Installation and Setup
 
-Following [AWS setup instructions](https://docs.google.com/presentation/d/1EjBfDnIauu9L5LIH_79XqIWkWfCeB1AA99Q7rD75W_I/edit#slide=id.p) with an Ubuntu 16 server, the following commands install the necessary packages. I am running wthis with a t2.medium instance, with a 16 GB EBS volume (8 GB default size was not large enough.)
+Following [AWS setup instructions](https://docs.google.com/presentation/d/1EjBfDnIauu9L5LIH_79XqIWkWfCeB1AA99Q7rD75W_I/edit#slide=id.p) with an Ubuntu 16 server, the following commands install the necessary packages. This runs on an t2.medium instance with a 16 GB EBS volume.
 
 ```
 1. conda install numpy scipy pandas scikit-learn flask sqlalchemy
