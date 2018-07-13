@@ -6,15 +6,12 @@ An application to match unlabeled images from videos to unlabeled sound files. A
 
 ## Installation and Setup
 
-Following [AWS setup instructions](https://docs.google.com/presentation/d/1EjBfDnIauu9L5LIH_79XqIWkWfCeB1AA99Q7rD75W_I/edit#slide=id.p) with an Ubuntu 16 server, the following commands install the necessary packages. This runs on an t2.medium instance with a 16 GB EBS volume.
+This runs on an AWS t2.medium instance with a 16 GB EBS volume running Ubuntu 16.
 
 ```
 1. conda install numpy scipy pandas scikit-learn flask sqlalchemy
-
 2. conda install pytorch-cpu torchvision-cpu -c pytorch
-
 3. conda install -c conda-forge tensorflow
-
 4. conda install pillow
 5. conda install sqlalchemy-utils
 ```
