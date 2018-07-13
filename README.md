@@ -4,18 +4,17 @@ An application for sound-effect engineers and independent film makers to match u
 
 [http://audioinsert.xyz](http://audioinsert.xyz)
 
-## Installation and Setup
-
-This runs on an AWS t2.medium instance with a 16 GB EBS volume running Ubuntu 16.
+## Installation
+These instructions work for Ubuntu 16. This application was developed on Mac OSX High Sierra.
 
 ```
 1. conda install numpy scipy pandas scikit-learn flask sqlalchemy
-2. conda install pytorch-cpu torchvision-cpu -c pytorch
+2. conda install pytorch-cpu torchvision-cpu -c pytorch (OSX: conda install pytorch torchvision -c pytorch)
 3. conda install -c conda-forge tensorflow
 4. conda install pillow
 ```
 
-Run the server
+## Run
 
 ```
 ./run_app.py
