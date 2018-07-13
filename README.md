@@ -1,6 +1,6 @@
 # SoundFX
 
-An application to match unlabeled images from videos to unlabeled sound files. A prototype for an automatic sound-effects insertion tool for sound effect engineers and independent film makers. 
+An application for sound-effect engineers and independent film makers to match unlabeled images from videos to unlabeled sound files. 
 
 [http://audioinsert.xyz](http://audioinsert.xyz)
 
